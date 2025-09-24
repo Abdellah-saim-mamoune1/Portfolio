@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function GetAllSections(){
     try{
-     const data=await axios.get("https://filesmanagementapp-g3f8djcxgubja3c6.spaincentral-01.azurewebsites.net/api/SectionsManagement/GetAllSections");
+     const data=await axios.get("https://uni-files-b0hqcchggqe0ehfq.spaincentral-01.azurewebsites.net/api/SectionsManagement/GetAllSections");
      console.log(data.data);
      return data.data;
     }catch(error){
@@ -11,9 +11,9 @@ export async function GetAllSections(){
 
 }
 
-export async function GetItemsBySection(Id:number){
+export async function GetItemsBySection(Id:string|undefined){
     try{
-     const data=await axios.get(`https://filesmanagementapp-g3f8djcxgubja3c6.spaincentral-01.azurewebsites.net/api/ItemsManagement/GetAllItemsBySectionId/${Id}`);
+     const data=await axios.get(`https://uni-files-b0hqcchggqe0ehfq.spaincentral-01.azurewebsites.net/api/ItemsManagement/GetAllItemsBySectionId/${Id}`);
       
      return data.data;
     }catch(error){
@@ -23,9 +23,9 @@ export async function GetItemsBySection(Id:number){
 }
 
 
-export async function SearchtemBySection(SectionId:number,Query:string){
+export async function SearchtemBySection(SectionId:string,Query:string){
     try{
-     const data=await axios.get(`https://filesmanagementapp-g3f8djcxgubja3c6.spaincentral-01.azurewebsites.net/api/ItemsManagement/SearchItemBySection&Name&Description/${SectionId},${Query}`);
+     const data=await axios.get(`https://uni-files-b0hqcchggqe0ehfq.spaincentral-01.azurewebsites.net/api/ItemsManagement/SearchItemBySection&Name&Description/${SectionId},${Query}`);
 
      return data;
     }catch(error){
@@ -36,7 +36,7 @@ export async function SearchtemBySection(SectionId:number,Query:string){
 
 export async function Searchtem(Query:string){
     try{
-     const data=await axios.get(`https://filesmanagementapp-g3f8djcxgubja3c6.spaincentral-01.azurewebsites.net/api/ItemsManagement/SearchItemByName&Description/${Query}`);
+     const data=await axios.get(`https://uni-files-b0hqcchggqe0ehfq.spaincentral-01.azurewebsites.net/api/ItemsManagement/SearchItemByName&Description/${Query}`);
 
      return data;
     }catch(error){
@@ -48,7 +48,7 @@ export async function Searchtem(Query:string){
 
 export async function AddNewSection(Name:string){
     try{
-     const data=await axios.post(`https://filesmanagementapp-g3f8djcxgubja3c6.spaincentral-01.azurewebsites.net/api/SectionsManagement/AddNewSection/${Name}`);
+     const data=await axios.post(`https://uni-files-b0hqcchggqe0ehfq.spaincentral-01.azurewebsites.net/api/SectionsManagement/AddNewSection/${Name}`);
      return data.data;
     }catch(error){
      return false;
@@ -57,9 +57,9 @@ export async function AddNewSection(Name:string){
 }
 
 
-export async function DeleteSection(id:number){
+export async function DeleteSection(id:string){
     try{
-     const data=await axios.delete(`https://filesmanagementapp-g3f8djcxgubja3c6.spaincentral-01.azurewebsites.net/api/SectionsManagement/DeleteSection/${id}`);
+     const data=await axios.delete(`https://uni-files-b0hqcchggqe0ehfq.spaincentral-01.azurewebsites.net/api/SectionsManagement/DeleteSection/${id}`);
      return data.data;
     }catch(error){
      return false;
@@ -69,9 +69,9 @@ export async function DeleteSection(id:number){
 
 
 
-export async function UpdateSection(id:number,name:string){
+export async function UpdateSection(id:string,name:string){
     try{
-     const data=await axios.put(`https://filesmanagementapp-g3f8djcxgubja3c6.spaincentral-01.azurewebsites.net/api/SectionsManagement/UpdateSectionName/${id},${name}`);
+     const data=await axios.put(`https://uni-files-b0hqcchggqe0ehfq.spaincentral-01.azurewebsites.net/api/SectionsManagement/UpdateSectionName/${id},${name}`);
      return data.data;
     }catch(error){
      return false;
@@ -81,7 +81,7 @@ export async function UpdateSection(id:number,name:string){
 
 
 export interface UpdateItem{
-    id:number,
+    id:string,
     title:string,
     description:string,
     file:File
@@ -90,7 +90,7 @@ export interface UpdateItem{
 
 export interface AddItem{
     type:string,
-    sectionId:number,
+    sectionId:string,
     title:string,
     description:string,
     file:File
@@ -98,7 +98,7 @@ export interface AddItem{
 
 export async function AddItem(form:AddItem){
     try{
-     const data=await axios.post('https://filesmanagementapp-g3f8djcxgubja3c6.spaincentral-01.azurewebsites.net/api/ItemsManagement/AddNewItem/',form);
+     const data=await axios.post('https://uni-files-b0hqcchggqe0ehfq.spaincentral-01.azurewebsites.net/api/ItemsManagement/AddNewItem/',form);
      return data.data;
     }catch(error){
      return false;
@@ -110,7 +110,7 @@ export async function AddItem(form:AddItem){
 
 export async function UpdateItem(form:UpdateItem){
     try{
-     const data=await axios.put('https://filesmanagementapp-g3f8djcxgubja3c6.spaincentral-01.azurewebsites.net/api/ItemsManagement/UpdateItem/',form);
+     const data=await axios.put('https://uni-files-b0hqcchggqe0ehfq.spaincentral-01.azurewebsites.net/api/ItemsManagement/UpdateItem/',form);
      return data.data;
     }catch(error){
      return false;
@@ -118,9 +118,9 @@ export async function UpdateItem(form:UpdateItem){
 
 }
 
-export async function DeleteItem(id:number){
+export async function DeleteItem(id:string){
     try{
-     const data=await axios.delete(`https://filesmanagementapp-g3f8djcxgubja3c6.spaincentral-01.azurewebsites.net/api/ItemsManagement/DeleteItemById/${id}`);
+     const data=await axios.delete(`https://uni-files-b0hqcchggqe0ehfq.spaincentral-01.azurewebsites.net/api/ItemsManagement/DeleteItemById/${id}`);
      return data.data;
     }catch(error){
      return false;

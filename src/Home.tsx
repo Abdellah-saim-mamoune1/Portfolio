@@ -56,7 +56,7 @@ export function Home() {
         <div className="mb-27">
         <h1 className="text-3xl font-bold mb-4">Welcome</h1>
         <p className="text-gray-100 mb-2">
-          This is a simple platform for sharing second-year computer science university files.
+          This is a simple platform for sharing second-year computer science files of tlemcen university 2025/2026.
         </p>
         <p className="text-gray-100 mb-2">Developer: Abdellah Saim Mamoune.</p>
         <p className="text-gray-100">All rights reserved.</p>

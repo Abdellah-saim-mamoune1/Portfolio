@@ -1,5 +1,5 @@
 export interface Section{
-    id:number;
+    id:string;
     name:string;
 }
 
@@ -15,14 +15,14 @@ export interface GitHubLink {
 }
 
 export interface ResourceItem {
-  id: number;
+  id: string;
   createdAt: string;
   youTubeVideos: YouTubeVideo[];
   gthub: GitHubLink[];
   aiText:string|null;
   title: string;
   file: string;
-  sectionId: number;
+  sectionId: string;
   type: string;
   description: string;
 }

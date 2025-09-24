@@ -21,23 +21,23 @@ export function Section() {
   const [search, setSearch] = useState("");
   const [fromDate] = useState("");
   const [toDate] = useState("");
-  const [showVideos, setShowVideos] = useState<Record<number, boolean>>({});
-  const [showGithub, setShowGithub] = useState<Record<number, boolean>>({});
+  const [showVideos, setShowVideos] = useState<Record<string, boolean>>({});
+  const [showGithub, setShowGithub] = useState<Record<string, boolean>>({});
   const [sectionSettingsOpen, setSectionSettingsOpen] = useState(false);
-  const [itemSettingsOpen, setItemSettingsOpen] = useState<number | null>(null);
+  const [itemSettingsOpen, setItemSettingsOpen] = useState<string | null>(null);
   const [editSectionName, setEditSectionName] = useState("");
   const [addItemMode, setAddItemMode] = useState(false);
-  const [updateItemMode, setUpdateItemMode] = useState<number | null>(null);
+  const [updateItemMode, setUpdateItemMode] = useState<string | null>(null);
   const [itemForm, setItemForm] = useState({ title: "", description: "", file: null as File | null, type: "Cours" });
   const IsAdmin = localStorage.getItem("IsAdmin") === "true";
-  const { id } = useParams();
+  const { id } = useParams<string>();
 
   useEffect(() => {
     if (id) fetchItems();
   }, [id]);
 
   const fetchItems = async () => {
-    const data = await GetItemsBySection(Number(id));
+    const data = await GetItemsBySection(id);
     if (data !== false) {
       setItems([...data].reverse());
     //  setFilteredItems(data);
@@ -61,13 +61,12 @@ export function Section() {
   }, [search, fromDate, toDate, items]);
 
   const handleDownload = (url: string) =>{
-  const driveViewerUrl = `https://drive.google.com/viewerng/viewer?embedded=true&url=${encodeURIComponent(url)}`;
-  window.open(driveViewerUrl, "_blank");}
+  window.open(url, "_blank");}
 
-  const toggleShowVideos = (id: number) => setShowVideos(prev => ({ ...prev, [id]: !prev[id] }));
-  const toggleShowGithub = (id: number) => setShowGithub(prev => ({ ...prev, [id]: !prev[id] }));
+  const toggleShowVideos = (id: string) => setShowVideos(prev => ({ ...prev, [id]: !prev[id] }));
+  const toggleShowGithub = (id: string) => setShowGithub(prev => ({ ...prev, [id]: !prev[id] }));
 
-  const handleDeleteItem = async (itemId: number) => {
+  const handleDeleteItem = async (itemId: string) => {
     if (confirm("Delete this item?")) {
       const success = await DeleteItem(itemId);
       if (success && items) setItems(items.filter(item => item.id !== itemId));
@@ -76,14 +75,14 @@ export function Section() {
 
   const handleDeleteSection = async () => {
     if (confirm("Delete section?") && id) {
-      const success = await DeleteSection(Number(id));
+      const success = await DeleteSection(id);
       if (success) window.location.href = "/";
     }
   };
 
   const handleUpdateSection = async () => {
     if (!editSectionName.trim() || !id) return;
-    const success = await UpdateSection(Number(id), editSectionName);
+    const success = await UpdateSection(id, editSectionName);
     if (success) {
       alert("Section updated");
       setSectionSettingsOpen(false);
@@ -111,7 +110,7 @@ export function Section() {
     }
   };
 
-  const handleUpdateItem = async (itemId: number) => {
+  const handleUpdateItem = async (itemId: string) => {
     if (!itemForm.title || !itemForm.file) return;
     const form = new FormData();
     form.append("id", itemId.toString());
@@ -216,7 +215,10 @@ export function Section() {
         ) : (
           <>
             <p className="text-gray-400 mb-2">{item.description}</p>
-            <p className="text-xs text-gray-500 mb-2">Date: {new Date(item.createdAt).toLocaleDateString()}</p>
+          <p className="text-xs text-gray-500 mb-2">
+  Date: {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "N/A"}
+</p>
+
            <div className="flex mt-2 sm:flex-row mb-4">
   <button
     onClick={() => handleDownload(item.file)}

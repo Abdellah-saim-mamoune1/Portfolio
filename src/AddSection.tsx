@@ -39,15 +39,15 @@ export function AddSection() {
 
   return (
     <div className="flex mt-30 items-center justify-center p-3 flex-1">
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+      <div className="w-full max-w-md p-8 bg-gray-800 rounded-lg shadow-lg">
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-semibold text-blue-700 mb-2">Add New Section</h2>
-          <p className={`${Result===true?"text-green-700":"text-red-700"}`}>{Result!==null&&(Result?"Section was added successfully":"Failed to add section")}</p>
+          <h2 className="text-2xl font-semibold text-white mb-2">Add New Section</h2>
+          <p className={`${Result===true?"text-green-500":"text-red-700"}`}>{Result!==null&&(Result?"Section was added successfully":"Failed to add section")}</p>
         </div>
 
         <motion.form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="section" className="block text-gray-700 mb-1">
+            <label htmlFor="section" className="block text-white mb-1">
               Section Name
             </label>
             <input
@@ -57,8 +57,9 @@ export function AddSection() {
               onChange={handleChange}
               maxLength={20}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter section name"
+  
+              className="w-full p-3 border text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          
             />
             {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
