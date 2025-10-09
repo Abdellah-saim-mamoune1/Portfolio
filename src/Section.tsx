@@ -60,8 +60,7 @@ export function Section() {
     setFilteredItems(filtered);
   }, [search, fromDate, toDate, items]);
 
-  const handleDownload = (url: string) =>{
-  window.open(url, "_blank");}
+ 
 
   const toggleShowVideos = (id: string) => setShowVideos(prev => ({ ...prev, [id]: !prev[id] }));
   const toggleShowGithub = (id: string) => setShowGithub(prev => ({ ...prev, [id]: !prev[id] }));
