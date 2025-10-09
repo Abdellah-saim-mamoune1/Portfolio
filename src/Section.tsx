@@ -220,12 +220,6 @@ export function Section() {
 </p>
 
            <div className="flex mt-2 sm:flex-row mb-4">
-  <button
-    onClick={() => handleDownload(item.file)}
-    className="text-white pr-3 py-1 rounded hover:bg-blue-700"
-  >
-    📄 Open
-  </button>
   <a
     href={item.file}
     download
